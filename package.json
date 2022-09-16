@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "commander": "^9.4.0",
+    "esm": "^3.2.25",
+    "express": "^4.18.1",
+    "module": "^1.0.0"
+  },
+  "name": "agandhi29_static_site_geneator",
+  "version": "0.1",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "bin": {
+    "nan1-ssg": "./main.js"
+  },
+  "author": "Anshul Gandhi",
+  "license": "ISC",
+  "keywords": [],
+  "escription": ""
+}
