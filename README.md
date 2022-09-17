@@ -7,7 +7,7 @@ DSP909 - Static stite generator whichcoverts the.txt file to static .html page. 
 In this release version user can do the following
 
 1. User can use the command line tool to specify the particular .txt file to convert it into .html file type.
-2. User can specify the folder which contains multiple .txt files to convert all of them in seperate .html file type.
+2. User can specify the folder which contains multiple .txt files to convert all of them into a separate .html file type.
 
 ## Requirements
 

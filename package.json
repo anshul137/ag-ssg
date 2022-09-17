@@ -6,7 +6,7 @@
     "module": "^1.0.0"
   },
   "name": "agandhi29_static_site_geneator",
-  "version": "0.1",
+  "version": "0.1.0",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
