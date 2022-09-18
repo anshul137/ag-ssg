@@ -21,7 +21,7 @@ export function ssg_(file) {
 
   //remove directory if already exist adn recurect it again
   if (fs.existsSync(dir)) {
-    fs.rm(dir, { recursive: true });
+    fs.rmSync(dir, { recursive: true });
   }
 
   // create the directory folder  if not exist

@@ -37,7 +37,11 @@ npm link
 - Build and run the project
 
 ```
- node app.js - <command line arguments>
+node app.js - command line arguments
+For example
+node app.js - i "test.txt" .
+if the file is in particular folder we have to provide the path like this  node app.js -i "./textfile/Silver Blaze.txt"
+
 ```
 
 ## Command line options
@@ -52,6 +56,7 @@ Command line option available for User in this tool
 
 ##.txt file for testing
 Folder in directory named **textFile** contains all the text file which i have used to test my code.
+One extra file is available in the main directory named "test.txt".
 
 ## Running the Tool with different commands
 
