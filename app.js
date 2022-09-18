@@ -13,15 +13,6 @@ if (program.version) {
   console.log('Version details: 0.1.0');
 }
 
-if (program.opts().file) {
-  console.log('file:' + program.opts().file);
-  ssg_(program.opts().file);
-}
-
-if (program.opts().dir) {
-  console.log('dir:' + program.opts().dir);
-  ssg_(program.opts().dir);
-}
 if (program.opts().help) {
   console.log(
     'To run the code in terminal \n' +
