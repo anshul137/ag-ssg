@@ -5,23 +5,24 @@
 */
 
 //start here
-import fs from 'fs';
-import path from 'path';
-import readline from 'readline';
 
+import readline from 'readline';
+import path from 'path';
+import fs from 'fs';
 export function ssg_(file) {
   let extension = path.extname(file);
   let filename = path.basename(file, extension);
-  var dir = './dist';
+  const dir = './dist';
+  /*
   //check text file type
   if (extension !== '.txt') {
     console.log('Wrong File type');
     return;
   }
-
+  */
   //remove directory if already exist adn recurect it again
   if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true });
+    fs.rmSync(dir, { recursive: true, force: true });
   }
 
   // create the directory folder  if not exist
@@ -33,26 +34,29 @@ export function ssg_(file) {
     if (err) {
       console.log(err);
       return;
-    }
-    if (stats.isDirectory()) {
-      fs.readdir(file, (err, files) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        files.forEach((file) => {
-          readFile(file + filename).then((data) => {
-            writeFile(filename, data);
-          });
-        });
-        generateIndexHtml(files);
-      });
     } else {
-      if (path.extname(file) === '.txt') {
-        readFile(file).then((data) => {
-          writeFile(filename, data);
-          generateIndexHtml(filename);
+      if (stats.isDirectory()) {
+        fs.readdir(file, (err, files) => {
+          files.forEach((fileN) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            if (path.extname(fileN) == '.txt') {
+              readFile(file + '/' + fileN).then(function (data) {
+                writeFile(fileN, data);
+              });
+            }
+          });
+          generateIndexHtml(files, true);
         });
+      } else {
+        if (path.extname(filename) == '.txt') {
+          readFile(file).then((data) => {
+            writeFile(filename, data);
+            generateIndexHtml(file);
+          });
+        }
       }
     }
   });
@@ -70,7 +74,7 @@ function readFile(file) {
       if (line !== '') {
         arr.push(line);
       } else {
-        arr.push(line);
+        arr.push('\n');
       }
     }
     resolve(arr);
@@ -78,17 +82,30 @@ function readFile(file) {
 }
 
 //function to generate index.html
-//need fix
-function generateIndexHtml(files) {
+
+function generateIndexHtml(files, dir) {
   let html = '';
   let content = '';
-  for (let i = 0; i < files.length; i++) {
-    content += '<li><a href="' + files[i] + '.html">' + files[i] + '</a></li>';
+  if (dir) {
+    for (var fileInpt of files) {
+      var htmlfile = fileInpt.substring(0, fileInpt.length - 4) + '.html';
+      html += `<li><a href="${htmlfile}">${htmlfile}</a></li>`;
+    }
+  } else {
+    var htmlfile = files.substring(0, files.length - 4) + '.html';
+    html += `<li><a href="${htmlfile}">${htmlfile}</a></li>`;
   }
-  html =
-    '<!DOCTYPE html><html><head><title>Index</title></head><body><ul>' +
-    content +
-    '</ul></body></html>';
+  html = `<!doctype html><html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>Title</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="../style.css">
+      </head>
+      <body >
+          ${content}
+      </body>
+      </html>`;
   fs.writeFile('./dist/index.html', html, (err) => {
     if (err) {
       console.log(err);
@@ -99,32 +116,42 @@ function generateIndexHtml(files) {
 }
 
 //function to write file
-//need fix
+
 function writeFile(filename, data) {
-  let content = '';
-  let html = '';
-  let title = filename.substring(0, filename.length - 4);
-  var filedest = './dist/' + filename + '.html';
-  return new Promise((resolve, reject) => {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i] === '') {
-        content += '<p></p>';
+  return new Promise(async (resolve, reject) => {
+    let content = '';
+    let html = '';
+    let title = filename.substring(0, filename.length - 4);
+    var filedest = './dist/' + filename + '.html';
+    for (var line of data) {
+      if (line !== '\n') {
+        content += `<p>${line}</p>`;
       } else {
-        content += '<p>' + data[i] + '</p>';
+        content += '\n';
       }
     }
-    html =
-      '<!DOCTYPE html><html><head><title>' +
-      title +
-      '</title></head><body>' +
-      content +
-      '</body></html>';
+    html = `
+        <!doctype html><html lang="en">
+      <head>
+          <meta charset="utf-8">
+          <title>${title}</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="../style.css">
+      </head>
+      <body >
+          ${content}
+      </body>
+      </html>`;
     fs.writeFile(filedest, html, (err) => {
       if (err) {
         console.log(err);
         return;
       }
-      console.log('File created successfully');
+      console.log(
+        'File created successfully ' + filename + 'check the dist folder'
+      );
     });
+
+    resolve(html);
   });
 }

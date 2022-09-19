@@ -41,7 +41,7 @@ node app.js - command line arguments
 For example
 node app.js - i "test.txt" .
 if the file is in particular folder we have to provide the path like this  node app.js -i "./textfile/Silver Blaze.txt"
-
+if you want to convert the whole folder text file to  html use this commnad node app.js -i textfile
 ```
 
 ## Command line options
@@ -50,7 +50,7 @@ Command line option available for User in this tool
 
 | Option               | Detailed Inforamtion                      |
 | -------------------- | ----------------------------------------- |
-| **-v,--version**     | Print the tool's name and current version |
+| **-v, --version**    | Print the tool's name and current version |
 | **-i, --input file** | Allow users to specify the file           |
 | **-h, --help**       | Prints information about usage of tool    |
 
@@ -64,3 +64,11 @@ One extra file is available in the main directory named "test.txt".
 | ---------------------------- | ------------------------------------------------------------------- |
 | `node app.js -i <.txt file>` | Create single .html file                                            |
 | `node app.js -i <folder>`    | Create all the .txt file to .html which are available in the folder |
+
+## Optional Feature
+
+In addition to the above feature i have implemented these feature in my site.
+
+- Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
+
+- if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.

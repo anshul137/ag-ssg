@@ -4,8 +4,8 @@ import { ssg_ } from './index.js';
 
 program
   .option('-v, --version', 'output the current version')
-  .option('-i --input <iteam> ', 'gets the input')
-  .option('-h --help', 'help');
+  .option('-i, --input <item>', 'gets the input')
+  .option('-h, --help', 'help');
 
 program.parse(process.argv);
 if (program.version) {

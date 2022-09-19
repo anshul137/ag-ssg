@@ -1,0 +1,20 @@
+
+.title {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    padding: 10px;
+    text-align: center;
+}
+
+body {
+    font-size: 20px;
+    font-weight: normal;  
+    color: black;
+    background-color : lightgoldenrodyellow;
+    padding: 20px;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    
+}
