@@ -62,6 +62,32 @@ export function ssg_(file) {
   });
 }
 
+//function to generate index.html
+function generateIndexHtml(inp, Dir) {
+  var content = '';
+  if (Dir) {
+    for (var file of inp) {
+      var htmlFile = file.substring(0, file.length - 4) + '.html';
+      content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
+    }
+  } else {
+    var htmlFile = inp.substring(0, inp.length - 4) + '.html';
+    content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
+  }
+
+  const template = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
+<body>
+    ${content}
+</body></html>`;
+  fs.writeFile('./dist/index.html', template, (err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Index file created successfully check dist folder');
+  });
+}
+
 //fcuntion to read file
 function readFile(file) {
   return new Promise(async (resolve, reject) => {
@@ -78,40 +104,6 @@ function readFile(file) {
       }
     }
     resolve(arr);
-  });
-}
-
-//function to generate index.html
-
-function generateIndexHtml(files, dir) {
-  let html = '';
-  let content = '';
-  if (dir) {
-    for (var fileInpt of files) {
-      var htmlfile = fileInpt.substring(0, fileInpt.length - 4) + '.html';
-      html += `<li><a href="${htmlfile}">${htmlfile}</a></li>`;
-    }
-  } else {
-    var htmlfile = files.substring(0, files.length - 4) + '.html';
-    html += `<li><a href="${htmlfile}">${htmlfile}</a></li>`;
-  }
-  html = `<!doctype html><html lang="en">
-      <head>
-          <meta charset="utf-8">
-          <title>Title</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <link rel="stylesheet" href="../style.css">
-      </head>
-      <body >
-          ${content}
-      </body>
-      </html>`;
-  fs.writeFile('./dist/index.html', html, (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('Index file created successfully');
   });
 }
 
