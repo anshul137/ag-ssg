@@ -5,124 +5,124 @@
 */
 
 //start here
-
+// fixed few bug as per the feedback in the previous submission(gitignore)
 import readline from 'readline';
 import path from 'path';
 import fs from 'fs';
 export function ssg_(file) {
-  let extension = path.extname(file);
-  let filename = path.basename(file, extension);
-  const dir = './dist';
-  /*
+	let extension = path.extname(file);
+	let filename = path.basename(file, extension);
+	const dir = './dist';
+	/*
   //check text file type
   if (extension !== '.txt') {
     console.log('Wrong File type');
     return;
   }
   */
-  //remove directory if already exist adn recurect it again
-  if (fs.existsSync(dir)) {
-    fs.rmSync(dir, { recursive: true, force: true });
-  }
+	//remove directory if already exist adn recurect it again
+	if (fs.existsSync(dir)) {
+		fs.rmSync(dir, { recursive: true, force: true });
+	}
 
-  // create the directory folder  if not exist
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
+	// create the directory folder  if not exist
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir);
+	}
 
-  fs.lstat(file, (err, stats) => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      if (stats.isDirectory()) {
-        fs.readdir(file, (err, files) => {
-          files.forEach((fileN) => {
-            if (err) {
-              console.log(err);
-              return;
-            }
-            if (path.extname(fileN) == '.txt') {
-              readFile(file + '/' + fileN).then(function (data) {
-                writeFile(fileN, data);
-              });
-            }
-          });
-          generateIndexHtml(files, true);
-        });
-      } else {
-        if (path.extname(filename) == '.txt') {
-          readFile(file).then((data) => {
-            writeFile(filename, data);
-            generateIndexHtml(file);
-          });
-        }
-      }
-    }
-  });
+	fs.lstat(file, (err, stats) => {
+		if (err) {
+			console.log(err);
+			return;
+		} else {
+			if (stats.isDirectory()) {
+				fs.readdir(file, (err, files) => {
+					files.forEach((fileN) => {
+						if (err) {
+							console.log(err);
+							return;
+						}
+						if (path.extname(fileN) == '.txt') {
+							readFile(file + '/' + fileN).then(function (data) {
+								writeFile(fileN, data);
+							});
+						}
+					});
+					generateIndexHtml(files, true);
+				});
+			} else {
+				if (path.extname(filename) == '.txt') {
+					readFile(file).then((data) => {
+						writeFile(filename, data);
+						generateIndexHtml(file);
+					});
+				}
+			}
+		}
+	});
 }
 
 //function to generate index.html
 function generateIndexHtml(inp, Dir) {
-  var content = '';
-  if (Dir) {
-    for (var file of inp) {
-      var htmlFile = file.substring(0, file.length - 4) + '.html';
-      content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
-    }
-  } else {
-    var htmlFile = inp.substring(0, inp.length - 4) + '.html';
-    content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
-  }
+	var content = '';
+	if (Dir) {
+		for (var file of inp) {
+			var htmlFile = file.substring(0, file.length - 4) + '.html';
+			content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
+		}
+	} else {
+		var htmlFile = inp.substring(0, inp.length - 4) + '.html';
+		content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
+	}
 
-  const template = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
+	const template = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
 <body>
     ${content}
 </body></html>`;
-  fs.writeFile('./dist/index.html', template, (err) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('Index file created successfully check dist folder');
-  });
+	fs.writeFile('./dist/index.html', template, (err) => {
+		if (err) {
+			console.log(err);
+			return;
+		}
+		console.log('Index file created successfully check dist folder');
+	});
 }
 
 //fcuntion to read file
 function readFile(file) {
-  return new Promise(async (resolve, reject) => {
-    let arr = [];
-    const rl = readline.createInterface({
-      input: fs.createReadStream(file),
-    });
-    //read line by line
-    for await (const line of rl) {
-      if (line !== '') {
-        arr.push(line);
-      } else {
-        arr.push('\n');
-      }
-    }
-    resolve(arr);
-  });
+	return new Promise(async (resolve, reject) => {
+		let arr = [];
+		const rl = readline.createInterface({
+			input: fs.createReadStream(file),
+		});
+		//read line by line
+		for await (const line of rl) {
+			if (line !== '') {
+				arr.push(line);
+			} else {
+				arr.push('\n');
+			}
+		}
+		resolve(arr);
+	});
 }
 
 //function to write file
 
 function writeFile(filename, data) {
-  return new Promise(async (resolve, reject) => {
-    let content = '';
-    let html = '';
-    let title = filename.substring(0, filename.length - 4);
-    var filedest = './dist/' + filename + '.html';
-    for (var line of data) {
-      if (line !== '\n') {
-        content += `<p>${line}</p>`;
-      } else {
-        content += '\n';
-      }
-    }
-    html = `
+	return new Promise(async (resolve, reject) => {
+		let content = '';
+		let html = '';
+		let title = filename.substring(0, filename.length - 4);
+		var filedest = './dist/' + filename + '.html';
+		for (var line of data) {
+			if (line !== '\n') {
+				content += `<p>${line}</p>`;
+			} else {
+				content += '\n';
+			}
+		}
+		html = `
         <!doctype html><html lang="en">
       <head>
           <meta charset="utf-8">
@@ -134,16 +134,18 @@ function writeFile(filename, data) {
           ${content}
       </body>
       </html>`;
-    fs.writeFile(filedest, html, (err) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      console.log(
-        'File created successfully ' + filename + 'check the dist folder'
-      );
-    });
+		fs.writeFile(filedest, html, (err) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+			console.log(
+				'File created successfully ' +
+					filename +
+					'check the dist folder'
+			);
+		});
 
-    resolve(html);
-  });
+		resolve(html);
+	});
 }
