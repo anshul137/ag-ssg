@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 import { program } from 'commander';
 import { ssg_ } from './index.js';
+//import { version } from './package.json' assert { type: 'json' };
 
 program
 	.option('-v, --version', 'output the current version')
@@ -10,7 +11,7 @@ program
 program.parse(process.argv);
 if (program.version) {
 	console.log('Name of the package: ' + ' ag-ssg');
-	console.log('Version details: 0.1.0');
+	console.log('Version details: ' + ' 0.0.1');
 }
 
 if (program.opts().help) {

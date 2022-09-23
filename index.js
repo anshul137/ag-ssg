@@ -110,7 +110,7 @@ function readFile(file) {
 //function to write file
 
 function writeFile(filename, data) {
-	return new Promise(async (resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		let content = '';
 		let html = '';
 		let title = filename.substring(0, filename.length - 4);
