@@ -51,7 +51,7 @@ export function ssg_(file) {
 					generateIndexHtml(files, true);
 				});
 			} else {
-				if (path.extname(filename) == '.txt') {
+				if ((path.extname(filename) == '.txt') || (path.extname(filename) == '.md')) {
 					readFile(file).then((data) => {
 						writeFile(filename, data);
 						generateIndexHtml(file);
@@ -117,7 +117,22 @@ function writeFile(filename, data) {
 		var filedest = './dist/' + filename + '.html';
 		for (var line of data) {
 			if (line !== '\n') {
-				content += `<p>${line}</p>`;
+				// If the line starts with a '#'
+				if (line.charAt(0) == '#') {
+					// And the 2nd char is also '#'
+					if (line.charAt(1) == '#') {
+						// Then 'content' should by header2
+						content += `<h2>${line}</h2>`;
+					}
+					// Otherwise, 'content' should be header1
+					else {
+						content += `<h1>${line}</h1>`;
+					}
+				}
+				// Otherwise, 'content' should be placed in a paragraph
+				else {
+					content += `<p>${line}</p>`;
+				}
 			} else {
 				content += '\n';
 			}
