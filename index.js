@@ -42,7 +42,7 @@ export function ssg_(file) {
 							console.log(err);
 							return;
 						}
-						if (path.extname(fileN) == '.txt') {
+						if ((extension == '.txt') || (extension == '.md')) {
 							readFile(file + '/' + fileN).then(function (data) {
 								writeFile(fileN, data);
 							});
@@ -51,7 +51,7 @@ export function ssg_(file) {
 					generateIndexHtml(files, true);
 				});
 			} else {
-				if ((path.extname(filename) == '.txt') || (path.extname(filename) == '.md')) {
+				if ((extension == '.txt') || (extension == '.md')) {
 					readFile(file).then((data) => {
 						writeFile(filename, data);
 						generateIndexHtml(file);
@@ -117,16 +117,22 @@ function writeFile(filename, data) {
 		var filedest = './dist/' + filename + '.html';
 		for (var line of data) {
 			if (line !== '\n') {
-				// If the line starts with a '#'
+				// If the line starts with a '#', then check if h1 or h2.
 				if (line.charAt(0) == '#') {
-					// And the 2nd char is also '#'
-					if (line.charAt(1) == '#') {
-						// Then 'content' should by header2
-						content += `<h2>${line}</h2>`;
+
+					// If the 2nd char is a space, then 'content' should be header1.
+					if (line.charAt(1) == ' ')
+					{
+						var str = new String();
+						str = line.substring(2);
+						content += `<h1>${str}</h1>`;
 					}
-					// Otherwise, 'content' should be header1
-					else {
-						content += `<h1>${line}</h1>`;
+					// If the 2nd char is also a '#' and the 3rd char is a space, then 'content' should be header2.
+					else if (line.charAt(1) == '#' && line.charAt(2) == ' ')
+					{
+						var str = new String();
+						str = line.substring(3);
+						content += `<h2>${str}</h2>`;
 					}
 				}
 				// Otherwise, 'content' should be placed in a paragraph
