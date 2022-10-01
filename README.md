@@ -76,3 +76,10 @@ In addition to the above feature i have implemented these feature in my site.
 ## Markdown Support
 
 -   Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
+-   Add support for a `horizontal` rule in Markdown. The Markdown `---` should get converted to an `<hr>` tag.
+
+## Language Support
+
+-   Add an option `-l,-- lang` flag, which indicates the language to use when generating the lang attribute on the root `html` element.
+-   For example `--lang fr` means the new generated documents will be in French.
+-   To use this feature in this app you can use this command `node app.js -l fr -i "./textfile"`. With this you can create the new `html` file in French

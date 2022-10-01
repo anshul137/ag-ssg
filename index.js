@@ -5,7 +5,7 @@
 */
 
 //start here
-// fixed few bug as per the feedback in the previous submission(gitignore)
+
 import readline from 'readline';
 import path from 'path';
 import fs from 'fs';
@@ -135,6 +135,10 @@ function writeFile(filename, data, language) {
 				// Otherwise, 'content' should be placed in a paragraph
 				else {
 					content += `<p>${line}</p>`;
+					//convert --- to hr
+					if (line == '---') {
+						content += `<hr>`;
+					}
 				}
 			} else {
 				content += '\n';
