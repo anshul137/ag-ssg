@@ -9,18 +9,12 @@
 import readline from 'readline';
 import path from 'path';
 import fs from 'fs';
-export function ssg_(file) {
+export function ssg_(file, language = 'en-CA') {
 	let extension = path.extname(file);
-	let filename = path.basename(file, extension);
+	let filename = path.basename(file);
 	const dir = './dist';
-	/*
-  //check text file type
-  if (extension !== '.txt') {
-    console.log('Wrong File type');
-    return;
-  }
-  */
-	//remove directory if already exist adn recurect it again
+
+	//remove directory if already exists and create new one
 	if (fs.existsSync(dir)) {
 		fs.rmSync(dir, { recursive: true, force: true });
 	}
@@ -42,19 +36,25 @@ export function ssg_(file) {
 							console.log(err);
 							return;
 						}
-						if ((extension == '.txt') || (extension == '.md')) {
+						if (
+							path.extname(fileN) == '.txt' ||
+							path.extname(fileN) == '.md'
+						) {
 							readFile(file + '/' + fileN).then(function (data) {
-								writeFile(fileN, data);
+								writeFile(fileN, data, language);
 							});
 						}
 					});
 					generateIndexHtml(files, true);
 				});
 			} else {
-				if ((extension == '.txt') || (extension == '.md')) {
+				if (
+					path.extname(filename) == '.txt' ||
+					path.extname(filename) == '.md'
+				) {
 					readFile(file).then((data) => {
-						writeFile(filename, data);
-						generateIndexHtml(file);
+						writeFile(filename, data, language);
+						generateIndexHtml(filename, false);
 					});
 				}
 			}
@@ -63,7 +63,7 @@ export function ssg_(file) {
 }
 
 //function to generate index.html
-function generateIndexHtml(inp, Dir) {
+function generateIndexHtml(inp, Dir, language = 'en-CA') {
 	var content = '';
 	if (Dir) {
 		for (var file of inp) {
@@ -75,7 +75,7 @@ function generateIndexHtml(inp, Dir) {
 		content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
 	}
 
-	const template = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
+	const template = `<!doctype html><html lang=${language}><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
 <body>
     ${content}
 </body></html>`;
@@ -88,7 +88,7 @@ function generateIndexHtml(inp, Dir) {
 	});
 }
 
-//fcuntion to read file
+//function to read file
 function readFile(file) {
 	return new Promise(async (resolve, reject) => {
 		let arr = [];
@@ -109,7 +109,7 @@ function readFile(file) {
 
 //function to write file
 
-function writeFile(filename, data) {
+function writeFile(filename, data, language) {
 	return new Promise((resolve, reject) => {
 		let content = '';
 		let html = '';
@@ -119,17 +119,14 @@ function writeFile(filename, data) {
 			if (line !== '\n') {
 				// If the line starts with a '#', then check if h1 or h2.
 				if (line.charAt(0) == '#') {
-
 					// If the 2nd char is a space, then 'content' should be header1.
-					if (line.charAt(1) == ' ')
-					{
+					if (line.charAt(1) == ' ') {
 						var str = new String();
 						str = line.substring(2);
 						content += `<h1>${str}</h1>`;
 					}
 					// If the 2nd char is also a '#' and the 3rd char is a space, then 'content' should be header2.
-					else if (line.charAt(1) == '#' && line.charAt(2) == ' ')
-					{
+					else if (line.charAt(1) == '#' && line.charAt(2) == ' ') {
 						var str = new String();
 						str = line.substring(3);
 						content += `<h2>${str}</h2>`;
@@ -144,7 +141,7 @@ function writeFile(filename, data) {
 			}
 		}
 		html = `
-        <!doctype html><html lang="en">
+        <!doctype html><html lang= ${language}>
       <head>
           <meta charset="utf-8">
           <title>${title}</title>

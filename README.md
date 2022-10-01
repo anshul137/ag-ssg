@@ -1,6 +1,6 @@
 # Static site Generator (ag-ssg)
 
-DSP909 - Static stite generator whichcoverts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
+DSP909 - Static site generator which converts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
 
 ## Outline
 
@@ -41,14 +41,14 @@ node app.js - command line arguments
 For example
 node app.js - i "test.txt" .
 if the file is in particular folder we have to provide the path like this  node app.js -i "./textfile/Silver Blaze.txt"
-if you want to convert the whole folder text file to  html use this commnad node app.js -i textfile
+if you want to convert the whole folder text file to  html use this command node app.js -i textfile
 ```
 
 ## Command line options
 
 Command line option available for User in this tool
 
-| Option               | Detailed Inforamtion                      |
+| Option               | Detailed Information                      |
 | -------------------- | ----------------------------------------- |
 | **-v, --version**    | Print the tool's name and current version |
 | **-i, --input file** | Allow users to specify the file           |
@@ -76,3 +76,8 @@ In addition to the above feature i have implemented these feature in my site.
 ## Markdown Support
 
 -   Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
+
+## Language Support
+
+-   In this Support now User can Add an optional `-l, --lang` flag which will indicates the language to use when Generating the `lang` attribute of all the `html` pages.
+-   To use this feature you need to run this command _node app.js -l fr -i "./textfile"_ where `-l fr` is for language French and `-i <text folder>` is the input folder.
