@@ -11,30 +11,30 @@ In this release version user can do the following
 
 ## Requirements
 
-- This tool is built using the [Node.js](https://nodejs.org/en/)
+-   This tool is built using the [Node.js](https://nodejs.org/en/)
 
 # Getting started
 
-- Clone the repository into your local drive
+-   Clone the repository into your local drive
 
 ```
 git clone  <repository url> <project_name>
 ```
 
-- Install all the dependencies
+-   Install all the dependencies
 
 ```
 cd <project_name>
 npm install
 ```
 
-- Run the npm link module
+-   Run the npm link module
 
 ```
 npm link
 ```
 
-- Build and run the project
+-   Build and run the project
 
 ```
 node app.js - command line arguments
@@ -69,6 +69,6 @@ One extra file is available in the main directory named "test.txt".
 
 In addition to the above feature i have implemented these feature in my site.
 
-- Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
+-   Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
 
-- if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.
+-   if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.
