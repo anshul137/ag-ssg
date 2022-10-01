@@ -6,7 +6,8 @@ import { ssg_ } from './index.js';
 program
 	.option('-v, --version', 'output the current version')
 	.option('-i, --input <item>', 'gets the input')
-	.option('-h, --help', 'help');
+	.option('-h, --help', 'help')
+	.option('-l, --lang <item>', 'gets the language');
 
 program.parse(process.argv);
 if (program.version) {
@@ -29,4 +30,9 @@ if (program.opts().help) {
 if (program.opts().input) {
 	console.log('input:' + program.opts().input);
 	ssg_(`${program.opts().input}`);
+}
+//added feature in lab3 for language.
+if (program.opts().lang) {
+	console.log('language:' + program.opts().lang);
+	ssg_(`${program.opts().input}`, `${program.opts().lang}`);
 }
