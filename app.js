@@ -12,6 +12,7 @@ program.parse(process.argv);
 if (program.version) {
 	console.log('Name of the package: ' + ' ag-ssg');
 	console.log('Version details: ' + ' 0.0.1');
+	return 0;
 }
 
 if (program.opts().help) {

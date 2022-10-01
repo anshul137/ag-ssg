@@ -13,14 +13,8 @@ export function ssg_(file) {
 	let extension = path.extname(file);
 	let filename = path.basename(file, extension);
 	const dir = './dist';
-	/*
-  //check text file type
-  if (extension !== '.txt') {
-    console.log('Wrong File type');
-    return;
-  }
-  */
-	//remove directory if already exist adn recurect it again
+
+	//remove directory if already exist and recurect it again
 	if (fs.existsSync(dir)) {
 		fs.rmSync(dir, { recursive: true, force: true });
 	}
@@ -42,7 +36,7 @@ export function ssg_(file) {
 							console.log(err);
 							return;
 						}
-						if ((extension == '.txt') || (extension == '.md')) {
+						if (extension == '.txt' || extension == '.md') {
 							readFile(file + '/' + fileN).then(function (data) {
 								writeFile(fileN, data);
 							});
@@ -51,7 +45,7 @@ export function ssg_(file) {
 					generateIndexHtml(files, true);
 				});
 			} else {
-				if ((extension == '.txt') || (extension == '.md')) {
+				if (extension == '.txt' || extension == '.md') {
 					readFile(file).then((data) => {
 						writeFile(filename, data);
 						generateIndexHtml(file);
@@ -88,7 +82,7 @@ function generateIndexHtml(inp, Dir) {
 	});
 }
 
-//fcuntion to read file
+//function to read file
 function readFile(file) {
 	return new Promise(async (resolve, reject) => {
 		let arr = [];
@@ -119,17 +113,14 @@ function writeFile(filename, data) {
 			if (line !== '\n') {
 				// If the line starts with a '#', then check if h1 or h2.
 				if (line.charAt(0) == '#') {
-
 					// If the 2nd char is a space, then 'content' should be header1.
-					if (line.charAt(1) == ' ')
-					{
+					if (line.charAt(1) == ' ') {
 						var str = new String();
 						str = line.substring(2);
 						content += `<h1>${str}</h1>`;
 					}
 					// If the 2nd char is also a '#' and the 3rd char is a space, then 'content' should be header2.
-					else if (line.charAt(1) == '#' && line.charAt(2) == ' ')
-					{
+					else if (line.charAt(1) == '#' && line.charAt(2) == ' ') {
 						var str = new String();
 						str = line.substring(3);
 						content += `<h2>${str}</h2>`;
