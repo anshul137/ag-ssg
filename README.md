@@ -72,3 +72,7 @@ In addition to the above feature i have implemented these feature in my site.
 -   Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
 
 -   if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.
+
+## Markdown Support
+
+-   Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
