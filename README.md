@@ -1,6 +1,6 @@
 # Static site Generator (ag-ssg)
 
-DSP909 - Static stite generator whichcoverts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
+DSP909 - Static site generator which converts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
 
 ## Outline
 
@@ -41,14 +41,14 @@ node app.js - command line arguments
 For example
 node app.js - i "test.txt" .
 if the file is in particular folder we have to provide the path like this  node app.js -i "./textfile/Silver Blaze.txt"
-if you want to convert the whole folder text file to  html use this commnad node app.js -i textfile
+if you want to convert the whole folder text file to  html use this command node app.js -i textfile
 ```
 
 ## Command line options
 
 Command line option available for User in this tool
 
-| Option               | Detailed Inforamtion                      |
+| Option               | Detailed Information                      |
 | -------------------- | ----------------------------------------- |
 | **-v, --version**    | Print the tool's name and current version |
 | **-i, --input file** | Allow users to specify the file           |
