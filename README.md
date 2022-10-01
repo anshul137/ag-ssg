@@ -76,8 +76,3 @@ In addition to the above feature i have implemented these feature in my site.
 ## Markdown Support
 
 -   Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
-
-## Language Support
-
--   In this Support now User can Add an optional `-l, --lang` flag which will indicates the language to use when Generating the `lang` attribute of all the `html` pages.
--   To use this feature you need to run this command _node app.js -l fr -i "./textfile"_ where `-l fr` is for language French and `-i <text folder>` is the input folder.
