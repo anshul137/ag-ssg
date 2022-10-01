@@ -34,5 +34,5 @@ if (program.opts().input) {
 //added feature in lab3 for language.
 if (program.opts().lang) {
 	console.log('language:' + program.opts().lang);
-	ssg_(`${program.opts().lang}`);
+	ssg_(`${program.opts().input}`, `${program.opts().lang}`);
 }
