@@ -13,7 +13,6 @@ program.parse(process.argv);
 if (program.version) {
 	console.log('Name of the package: ' + ' ag-ssg');
 	console.log('Version details: ' + ' 0.0.1');
-	return 0;
 }
 
 if (program.opts().help) {
@@ -35,5 +34,5 @@ if (program.opts().input) {
 //added feature in lab3 for language.
 if (program.opts().lang) {
 	console.log('language:' + program.opts().lang);
-	ssg_(`${program.opts().input}`, `${program.opts().lang}`);
+	ssg_(`${program.opts().lang}`);
 }
