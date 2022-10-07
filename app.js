@@ -7,7 +7,8 @@ program
 	.option('-v, --version', 'output the current version')
 	.option('-i, --input <item>', 'gets the input')
 	.option('-h, --help', 'help')
-	.option('-l, --lang <item>', 'gets the language');
+	.option('-l, --lang <item>', 'gets the language')
+	.option('-c, --config <item>', 'get the config');
 
 program.parse(process.argv);
 if (program.version) {
@@ -35,4 +36,9 @@ if (program.opts().input) {
 if (program.opts().lang) {
 	console.log('language:' + program.opts().lang);
 	ssg_(`${program.opts().input}`, `${program.opts().lang}`);
+}
+
+if (program.opts().config) {
+	console.log('config: ' + program.opts().config)
+	ssg_(null, null, program.opts().config)
 }
