@@ -5,14 +5,29 @@
 */
 
 //start here
+const config = {
+	input: './test.txt',
+	output: './dist',
+	lang: 'en-CA'
+}
 
 import readline from 'readline';
-import path from 'path';
+import path, { parse } from 'path';
 import fs from 'fs';
-export function ssg_(file, language = 'en-CA') {
-	let extension = path.extname(file);
-	let filename = path.basename(file);
-	const dir = './dist';
+export function ssg_(file, language = 'en-CA', configPath = null) {
+	let extension, filename, dir;	 
+	if (configPath) {
+		applyConfig(configPath);
+		extension = path.extname(config.input);
+		filename = path.basename(config.input);
+		dir = config.output;
+		file = config.input;
+		language = config.lang;
+	} else {
+		extension = path.extname(file);
+		filename = path.basename(file);
+		dir = './dist';
+	}
 
 	//remove directory if already exists and create new one
 	if (fs.existsSync(dir)) {
@@ -45,7 +60,12 @@ export function ssg_(file, language = 'en-CA') {
 							});
 						}
 					});
-					generateIndexHtml(files, true);
+					if (configPath) {
+						generateIndexHtml(files, true, config.lang);
+					} else {
+						generateIndexHtml(files, true);
+					}
+					
 				});
 			} else {
 				if (
@@ -54,7 +74,11 @@ export function ssg_(file, language = 'en-CA') {
 				) {
 					readFile(file).then((data) => {
 						writeFile(filename, data, language);
-						generateIndexHtml(filename, false);
+						if (configPath) {
+							generateIndexHtml(filename, false, config.lang);
+						} else {
+							generateIndexHtml(filename, false)
+						}
 					});
 				}
 			}
@@ -75,16 +99,16 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 		content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
 	}
 
-	const template = `<!doctype html><html lang=${language}><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
+	const template = `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
 <body>
     ${content}
 </body></html>`;
-	fs.writeFile('./dist/index.html', template, (err) => {
+	fs.writeFile(`./${config.output}/index.html`, template, (err) => {
 		if (err) {
 			console.log(err);
 			return;
 		}
-		console.log('Index file created successfully check dist folder');
+		console.log(`Index file created successfully check ${config.output} folder`);
 	});
 }
 
@@ -114,7 +138,7 @@ function writeFile(filename, data, language) {
 		let content = '';
 		let html = '';
 		let title = filename.substring(0, filename.length - 4);
-		var filedest = './dist/' + filename + '.html';
+		var filedest = config.output + '/' + filename + '.html';
 		for (var line of data) {
 			if (line !== '\n') {
 				// If the line starts with a '#', then check if h1 or h2.
@@ -145,7 +169,7 @@ function writeFile(filename, data, language) {
 			}
 		}
 		html = `
-        <!doctype html><html lang= ${language}>
+        <!doctype html><html lang="${language}">
       <head>
           <meta charset="utf-8">
           <title>${title}</title>
@@ -170,4 +194,25 @@ function writeFile(filename, data, language) {
 
 		resolve(html);
 	});
+}
+
+function applyConfig(filename) {
+	try {
+		const rawdata = fs.readFileSync(filename);
+		const parsedConfig = JSON.parse(rawdata);
+
+		if (parsedConfig.input) {
+			config.input = parsedConfig.input;
+		}
+		if (parsedConfig.output) {
+			config.output = parsedConfig.output;
+		}
+		if (parsedConfig.lang) {
+			config.lang = parsedConfig.lang;
+		}
+	} catch (error) {
+		console.error(error.message)
+		process.exit()
+	}
+
 }
