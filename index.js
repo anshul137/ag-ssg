@@ -8,14 +8,22 @@
 const config = {
 	input: './test.txt',
 	output: './dist',
-	lang: 'en-CA'
-}
+	lang: 'en-CA',
+};
 
 import readline from 'readline';
-import path, { parse } from 'path';
+import path, {parse} from 'path';
 import fs from 'fs';
 export function ssg_(file, language = 'en-CA', configPath = null) {
-	let extension, filename, dir;	 
+	let extension, filename, dir;
+
+	if (fs.existsSync(dir)) {
+		fs.rmSync(dir, {recursive: true, force: true});
+	}
+
+	if (!fs.existsSync(dir)) {
+		fs.mkdirSync(dir);
+	}
 	if (configPath) {
 		applyConfig(configPath);
 		extension = path.extname(config.input);
@@ -27,16 +35,6 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 		extension = path.extname(file);
 		filename = path.basename(file);
 		dir = './dist';
-	}
-
-	//remove directory if already exists and create new one
-	if (fs.existsSync(dir)) {
-		fs.rmSync(dir, { recursive: true, force: true });
-	}
-
-	// create the directory folder  if not exist
-	if (!fs.existsSync(dir)) {
-		fs.mkdirSync(dir);
 	}
 
 	fs.lstat(file, (err, stats) => {
@@ -65,7 +63,6 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 					} else {
 						generateIndexHtml(files, true);
 					}
-					
 				});
 			} else {
 				if (
@@ -77,7 +74,7 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 						if (configPath) {
 							generateIndexHtml(filename, false, config.lang);
 						} else {
-							generateIndexHtml(filename, false)
+							generateIndexHtml(filename, false);
 						}
 					});
 				}
@@ -108,7 +105,9 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 			console.log(err);
 			return;
 		}
-		console.log(`Index file created successfully check ${config.output} folder`);
+		console.log(
+			`Index file created successfully check ${config.output} folder`
+		);
 	});
 }
 
@@ -211,8 +210,7 @@ function applyConfig(filename) {
 			config.lang = parsedConfig.lang;
 		}
 	} catch (error) {
-		console.error(error.message)
-		process.exit()
+		console.error(error.message);
+		process.exit();
 	}
-
 }

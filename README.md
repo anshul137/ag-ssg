@@ -48,12 +48,12 @@ if you want to convert the whole folder text file to  html use this command node
 
 Command line option available for User in this tool
 
-| Option               | Detailed Information                           |  
-| -------------------- | ---------------------------------------------- |
-| **-v, --version**    | Print the tool's name and current version      |
-| **-i, --input file** | Allow users to specify the file                |
-| **-h, --help**       | Prints information about usage of tool         |
-| **-c, --config file**     | Allow user to use tool with config        |
+| Option                | Detailed Information                      |
+| --------------------- | ----------------------------------------- |
+| **-v, --version**     | Print the tool's name and current version |
+| **-i, --input file**  | Allow users to specify the file           |
+| **-h, --help**        | Prints information about usage of tool    |
+| **-c, --config file** | Allow user to use tool with config        |
 
 ##.txt file for testing
 Folder in directory named **textFile** contains all the text file which i have used to test my code.
@@ -62,11 +62,11 @@ Another extra file is called "config.json" and can be used to test `--config` co
 
 ## Running the Tool with different commands
 
-| Command type                 | Description                                                                                               |
-| ---------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `node app.js -i <.txt file>` | Create single .html file                                                                                  |
-| `node app.js -i <folder>`    | Create all the .txt file to .html which are available in the folder                                       |
-| `node app.js -config <.json file`        | Create all the .txt file to .html which are available in the file or folder which specified in the config |
+| Command type                      | Description                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `node app.js -i <.txt file>`      | Create single .html file                                                                                  |
+| `node app.js -i <folder>`         | Create all the .txt file to .html which are available in the folder                                       |
+| `node app.js -config <.json file` | Create all the .txt file to .html which are available in the file or folder which specified in the config |
 
 ## Optional Feature
 
@@ -87,12 +87,11 @@ In addition to the above feature i have implemented these feature in my site.
 -   For example `--lang fr` means the new generated documents will be in French.
 -   To use this feature in this app you can use this command `node app.js -l fr -i "./textfile"`. With this you can create the new `html` file in French
 
-## Config Support
+## Configuration Support
 
-- Use option `-c, --config <config-file>` flat, which indicates that the config functionality will be user.
-- Config Supports following fields:
-  - `output` - the output folder (`./dist` by default)
-  - `input` - the input folder/file (`./test.md` by default)
-  - `lang` - the specified language (`en-CA` by default)
-- To use this feature in the app you can use this command `node app.js --config config.json`
- 
+-   Use option `-c, --config <config-file>` flat, which indicates that the config functionality will be user.
+-   Config Supports following fields:
+    -   `output` - the output folder (`./dist` by default)
+    -   `input` - the input folder/file (`./test.md` by default)
+    -   `lang` - the specified language (`en-CA` by default)
+-   To use this feature in the app you can use this command `node app.js --config config.json`
