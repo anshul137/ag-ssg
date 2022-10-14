@@ -28,6 +28,7 @@ if (program.opts().help) {
 			'node app.js -v --version to get the version details\n' +
 			'node app.js -h --help  to get the option \n' +
 			'node app.js -l --lang  option for language support \n' +
+			'node app.js -c --config  option for config support \n' +
 			'Need to install all the dependencies such as npm  install , npm links , Build and run the project\n'
 	);
 }
