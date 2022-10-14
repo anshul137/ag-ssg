@@ -1,7 +1,10 @@
 #! /usr/bin/env node
-import { program } from 'commander';
-import { ssg_ } from './index.js';
-//import { version } from './package.json' assert { type: 'json' };
+import {program} from 'commander';
+import {ssg_} from './index.js';
+import {readFile} from 'fs/promises';
+const json = JSON.parse(
+	await readFile(new URL('./package.json', import.meta.url))
+);
 
 program
 	.option('-v, --version', 'output the current version')
@@ -13,7 +16,7 @@ program
 program.parse(process.argv);
 if (program.version) {
 	console.log('Name of the package: ' + ' ag-ssg');
-	console.log('Version details: ' + ' 0.0.1');
+	console.log('Version details: ' + json.version);
 }
 
 if (program.opts().help) {
@@ -39,6 +42,6 @@ if (program.opts().lang) {
 }
 
 if (program.opts().config) {
-	console.log('config: ' + program.opts().config)
-	ssg_(null, null, program.opts().config)
+	console.log('config: ' + program.opts().config);
+	ssg_(null, null, program.opts().config);
 }
