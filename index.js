@@ -21,9 +21,6 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 		fs.rmSync(dir, {recursive: true, force: true});
 	}
 
-	if (!fs.existsSync(dir)) {
-		fs.mkdirSync(dir);
-	}
 	if (configPath) {
 		applyConfig(configPath);
 		extension = path.extname(config.input);
