@@ -93,7 +93,14 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 		content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
 	}
 
-	const template = `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css"></head>
+	const template = `<!doctype html><html lang="${language}"><head><meta charset="utf-8"><title>Main Page</title><link rel="stylesheet" href="../style.css">
+	<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+	<script>
+  	function addDarkmodeWidget() {
+    new Darkmode().showWidget();
+  }
+  window.addEventListener('load', addDarkmodeWidget);
+</script></head>
 <body>
     ${content}
 </body></html>`;
@@ -171,6 +178,13 @@ function writeFile(filename, data, language) {
           <title>${title}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <link rel="stylesheet" href="../style.css">
+		  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+		<script>
+  		function addDarkmodeWidget() {
+    	new Darkmode().showWidget();
+  }
+  window.addEventListener('load', addDarkmodeWidget);
+</script>
       </head>
       <body >
           ${content}
