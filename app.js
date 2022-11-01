@@ -14,6 +14,7 @@ program
 	.option('-c, --config <item>', 'get the config');
 
 program.parse(process.argv);
+
 if (program.version) {
 	console.log('Name of the package: ' + ' ag-ssg');
 	console.log('Version details: ' + json.version);
@@ -32,6 +33,7 @@ if (program.opts().help) {
 			'Need to install all the dependencies such as npm  install , npm links , Build and run the project\n'
 	);
 }
+
 if (program.opts().input) {
 	console.log('input:' + program.opts().input);
 	ssg_(`${program.opts().input}`);

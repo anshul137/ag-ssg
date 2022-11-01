@@ -12,14 +12,30 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "npx prettier --write .",
+    "esLint": "npx eslint ."
   },
   "type": "module",
-  "bin": {
-    "nan1-ssg": "./main.js"
-  },
   "author": "Anshul Gandhi",
   "license": "ISC",
   "keywords": [],
-  "escription": ""
+  "escription": "",
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.7.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

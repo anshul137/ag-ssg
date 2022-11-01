@@ -12,7 +12,7 @@ const config = {
 };
 
 import readline from 'readline';
-import path, {parse} from 'path';
+import path from 'path';
 import fs from 'fs';
 export function ssg_(file, language = 'en-CA', configPath = null) {
 	let extension, filename, dir;
@@ -29,7 +29,7 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 		file = config.input;
 		language = config.lang;
 	} else {
-		extension = path.extname(file);
+		//extension = path.extname(file);
 		filename = path.basename(file);
 		dir = './dist';
 	}

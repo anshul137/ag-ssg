@@ -9,32 +9,7 @@ In this release version user can do the following
 1. User can use the command line tool to specify the particular .txt file to convert it into .html file type.
 2. User can specify the folder which contains multiple .txt files to convert all of them into a separate .html file type.
 
-## Requirements
-
--   This tool is built using the [Node.js](https://nodejs.org/en/)
-
-# Getting started
-
--   Clone the repository into your local drive
-
-```
-git clone  <repository url> <project_name>
-```
-
--   Install all the dependencies
-
-```
-cd <project_name>
-npm install
-```
-
--   Run the npm link module
-
-```
-npm link
-```
-
--   Build and run the project
+- Build and run the project
 
 ```
 node app.js - command line arguments
@@ -72,26 +47,26 @@ Another extra file is called "config.json" and can be used to test `--config` co
 
 In addition to the above feature i have implemented these feature in my site.
 
--   Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
+- Improve the look and feel of your generated HTML pages using a default stylesheet that you design.
 
--   if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.
+- if the user specifies a folder for the input, automatically generate an index.html file, which has relative links to each of the generated HTML files.
 
 ## Markdown Support
 
--   Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
--   Add support for a `horizontal` rule in Markdown. The Markdown `---` should get converted to an `<hr>` tag.
+- Initial support for the parsing of `.md` files has been added and the tool will now appropriately handle the `# header1` and `## header2` syntax features when a `.md` file is used for data input.
+- Add support for a `horizontal` rule in Markdown. The Markdown `---` should get converted to an `<hr>` tag.
 
 ## Language Support
 
--   Add an option `-l,-- lang` flag, which indicates the language to use when generating the lang attribute on the root `html` element.
--   For example `--lang fr` means the new generated documents will be in French.
--   To use this feature in this app you can use this command `node app.js -l fr -i "./textfile"`. With this you can create the new `html` file in French
+- Add an option `-l,-- lang` flag, which indicates the language to use when generating the lang attribute on the root `html` element.
+- For example `--lang fr` means the new generated documents will be in French.
+- To use this feature in this app you can use this command `node app.js -l fr -i "./textfile"`. With this you can create the new `html` file in French
 
 ## Configuration Support
 
--   Use option `-c, --config <config-file>` flat, which indicates that the config functionality will be user.
--   Config Supports following fields:
-    -   `output` - the output folder (`./dist` by default)
-    -   `input` - the input folder/file (`./test.md` by default)
-    -   `lang` - the specified language (`en-CA` by default)
--   To use this feature in the app you can use this command `node app.js --config config.json`
+- Use option `-c, --config <config-file>` flat, which indicates that the config functionality will be user.
+- Config Supports following fields:
+  - `output` - the output folder (`./dist` by default)
+  - `input` - the input folder/file (`./test.md` by default)
+  - `lang` - the specified language (`en-CA` by default)
+- To use this feature in the app you can use this command `node app.js --config config.json`
