@@ -48,3 +48,5 @@ if (program.opts().config) {
 	console.log('config: ' + program.opts().config);
 	ssg_(null, null, program.opts().config);
 }
+
+export {program};
