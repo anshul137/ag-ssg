@@ -81,3 +81,12 @@ describe('index.html', () => {
 		expect(file).toBe(ssg_(path));
 	});
 });
+
+//testing the if textfile folder contains the .txt files
+describe('textfile folder', () => {
+	test('textfile folder exists', async () => {
+		const path = './textfile';
+		const file = ssg_(path);
+		expect(file).toBe(ssg_(path));
+	});
+});
