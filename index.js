@@ -36,7 +36,7 @@ export function ssg_(file, language = 'en-CA', configPath = null) {
 
 	fs.lstat(file, (err, stats) => {
 		if (err) {
-			console.log(err);
+			//console.log(err);
 			return;
 		} else {
 			if (stats.isDirectory()) {
@@ -97,7 +97,7 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 	<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 	<script>
   	function addDarkmodeWidget() {
-    new Darkmode().showWidget();
+    new  Darkmode().showWidget();
   }
   window.addEventListener('load', addDarkmodeWidget);
 </script></head>
@@ -106,7 +106,7 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 </body></html>`;
 	fs.writeFile(`./${config.output}/index.html`, template, (err) => {
 		if (err) {
-			console.log(err);
+			//console.log(err);
 			return;
 		}
 		console.log(
@@ -192,7 +192,7 @@ function writeFile(filename, data, language) {
       </html>`;
 		fs.writeFile(filedest, html, (err) => {
 			if (err) {
-				console.log(err);
+				//console.log(err);clear
 				return;
 			}
 			console.log(
@@ -225,3 +225,5 @@ function applyConfig(filename) {
 		process.exit();
 	}
 }
+
+export {config, applyConfig, readFile, writeFile};
