@@ -91,3 +91,50 @@ To run the [esLint](https://eslint.org/) using the `npm` command line on your en
 ```
 npm run esLint
 ```
+
+## Testing Guideline
+
+Code that is written needs to be tested to ensure that it achieves the desired behavior. 
+We are using [JEST](https://jestjs.io/) to test our code.
+Jest is one of Facebook's open-source projects that is both under very active development and is also being used to ship code to everybody on [Facebook.com](https://www.facebook.com).  
+
+### Unit testing
+
+Some of the packages within this project need testing. All the testing file reside in the `root` directory of the project. If the scope of your work requires a unit test, this is where you will write it in. 
+
+It is possible to run the test itself manually to inspect that the new behavior is indeed correct. Here is a small code snippet of how to do just that. This is useful when debugging a failing test. To do so you can follow these steps.
+
+```
+npm test
+```
+To run the test on single file
+
+```
+npm test app
+```
+#### Expected output
+
+```
+Test Suites: 2 passed, 2 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        2.058 s, estimated 3 s
+Ran all test suites.
+```
+## Add Additional test
+If you work require you create the new test please add the file into the `root` directory of this project.
+
+## Code Conventions
+
+- 2 spaces for indentation (no tabs).
+- 80 character line length is strongly preferred.
+- Prefer `'` over `"`.
+- ES6 syntax when possible.
+- Use [TypeScript](https://www.typescriptlang.org/).
+- Use semicolons;
+- Trailing commas,
+- Avd abbr wrds.
+
+## License
+
+By contributing to this project, you agree that your contributions will be licensed under its MIT license.
