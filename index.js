@@ -116,7 +116,7 @@ function generateIndexHtml(inp, Dir, language = 'en-CA') {
 }
 
 //function to read file
-function readFile(file) {
+export function readFile(file) {
 	return new Promise(async (resolve, reject) => {
 		let arr = [];
 		const rl = readline.createInterface({
@@ -136,7 +136,7 @@ function readFile(file) {
 
 //function to write file
 
-function writeFile(filename, data, language) {
+export function writeFile(filename, data, language) {
 	return new Promise((resolve, reject) => {
 		let content = '';
 		let html = '';
@@ -206,7 +206,7 @@ function writeFile(filename, data, language) {
 	});
 }
 
-function applyConfig(filename) {
+export function applyConfig(filename) {
 	try {
 		const rawdata = fs.readFileSync(filename);
 		const parsedConfig = JSON.parse(rawdata);
@@ -226,4 +226,4 @@ function applyConfig(filename) {
 	}
 }
 
-export {config, applyConfig, readFile, writeFile};
+export {config};

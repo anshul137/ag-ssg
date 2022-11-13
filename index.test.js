@@ -1,6 +1,6 @@
-import {config} from './index';
+import {config, readFile, applyConfig, writeFile} from './index';
 import {ssg_} from './index';
-
+import {jest} from '@jest/globals';
 describe('index', () => {
 	test('config input', async () => {
 		config.input = ssg_(`${config.input}`);
@@ -16,7 +16,6 @@ describe('index', () => {
 	});
 });
 
-// file handling tests
 describe('file handling', () => {
 	test('read file', async () => {
 		const file = ssg_(`${config.input}`);
@@ -31,7 +30,7 @@ describe('file handling', () => {
 		expect(file).toBe(ssg_(`${config.input}`));
 	});
 });
-// test file handling with text files
+
 describe('file handling with text files', () => {
 	test('read file', async () => {
 		const path = './test.txt';
@@ -49,7 +48,7 @@ describe('file handling with text files', () => {
 		expect(file).toBe(ssg_(path));
 	});
 });
-// test file handling with markdown files
+
 describe('file handling with markdown files', () => {
 	test('read file', async () => {
 		const path = './test.md';
@@ -68,7 +67,6 @@ describe('file handling with markdown files', () => {
 	});
 });
 
-// test to check if the index.html file is generated
 describe('index.html', () => {
 	test('index.html file', async () => {
 		const path = './index.html';
@@ -82,7 +80,6 @@ describe('index.html', () => {
 	});
 });
 
-//testing the if textfile folder contains the .txt files
 describe('textfile folder', () => {
 	test('textfile folder exists', async () => {
 		const path = './textfile';
@@ -90,3 +87,22 @@ describe('textfile folder', () => {
 		expect(file).toBe(ssg_(path));
 	});
 });
+
+// test for function readfile
+describe('readfile', () => {
+	test('readfile', async () => {
+		const path = 'test.txt';
+		const file = readFile(path);
+		expect(file).toStrictEqual(readFile(path));
+	});
+});
+
+//test for function applyConfig
+describe('applyConfig', () => {
+	test('applyConfig', async () => {
+		const path = 'config.json';
+		const file = applyConfig(path);
+		expect(file).toStrictEqual(applyConfig(path));
+	});
+});
+
