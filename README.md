@@ -1,6 +1,10 @@
+ <p align="center">
+  <img src="https://user-images.githubusercontent.com/69475280/211734719-f692570e-3a96-4cb0-b9f9-c608abb79e91.jpg" alt="SSG" width="200px">
+ </p>
+
 # Static site Generator (ag-ssg)
 
-DSP909 - Static site generator which converts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
+Static site generator which converts the.txt file to static .html page. In this version of project we need to create the command line tool which will help to process the .txt file to .html files
 
 ## Outline
 
