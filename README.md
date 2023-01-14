@@ -12,6 +12,7 @@ In this release version user can do the following
 
 1. User can use the command line tool to specify the particular .txt file to convert it into .html file type.
 2. User can specify the folder which contains multiple .txt files to convert all of them into a separate .html file type.
+3. Html file will be created in the dist folder.
 
 - Build and run the project
 
