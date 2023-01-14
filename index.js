@@ -80,9 +80,10 @@ export function ssg_(file, language = "en-CA", configPath = null) {
 //function to generate index.html
 function generateIndexHtml(inp, Dir, language = "en-CA") {
   var content = "";
+  var htmlFile;
   if (Dir) {
     for (var file of inp) {
-      var htmlFile = file.substring(0, file.length - 4) + ".html";
+      htmlFile = file.substring(0, file.length - 4) + ".html";
       content += `<a href="${htmlFile}"> ${htmlFile} </a>\n<br>`;
     }
   } else {
